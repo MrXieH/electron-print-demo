@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+    <title>Document</title>
+    <style>
+        #pt {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+<div id='pt'>
+    {{ n }}
+</div>
+</body>
+<script>
+  //引入ipcRenderer对象
+  const {
+    ipcRenderer
+  } = require('electron')
+  new Vue({
+    el: "#pt",
+    data: {
+      n: 0
+    },
+    mounted() {
+      ipcRenderer.on('setPrintData', (e, data) => { //接收响应
+        this.n = data
+        ipcRenderer.sendToHost('initDataSuccess', data) //向webview所在页面的进程传达消息
+      })
+    },
+    methods: {}
+  })
+</script>
