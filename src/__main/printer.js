@@ -33,9 +33,9 @@ function print(event) {
   if (item) {
     const printWindow = new BrowserWindow({
       title: '打印测试',
-      show: false,
       width: 800,
       height: 600,
+      show: false,
       webPreferences: {
         nodeIntegration: true
       }

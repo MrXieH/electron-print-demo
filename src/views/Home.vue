@@ -55,6 +55,10 @@ export default {
       })
     },
     printAll() {
+      if (!this.printerList.length) {
+        alert('未检测到打印机')
+        return
+      }
       const { ipcRenderer } = this.$electron
       ipcRenderer.send('print', {
         list: JSON.parse(JSON.stringify(this.dataList)),
